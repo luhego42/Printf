@@ -6,22 +6,25 @@
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:16:59 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/10 16:35:35 by luhego           ###   ########.fr       */
+/*   Updated: 2022/11/14 16:22:01 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void ft_putstr(const char *str)
+void	ft_putstr(const char *str, int *count)
 {
 	int	i;
 
 	i = 0;
 	if (!str)
+	{
+		ft_putstr("(null)", count);
 		return ;
+	}
 	while (str[i])
 	{
-		ft_putchar(str[i]);
+		ft_putchar(str[i], count);
 		i++;
 	}
 }

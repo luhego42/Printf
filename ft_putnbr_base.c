@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:16:22 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/14 16:08:45 by luhego           ###   ########.fr       */
+/*   Created: 2022/11/10 16:07:52 by luhego            #+#    #+#             */
+/*   Updated: 2022/11/14 16:47:56 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c, int *count)
+void	ft_putnbr_base(long long nbr, char *base, int *count)
 {
-	write(1, &c, 1);
-	*count += 1;
+	long long	base_len;
+
+	base_len = ft_strlen(base);
+	if (nbr >= 0 && nbr < base_len)
+		ft_putchar(base[nbr], count);
+	else if (nbr < 0)
+	{
+		ft_putchar('-', count);
+		ft_putnbr_base(nbr * (-1), base, count);
+	}
+	else
+	{
+		ft_putnbr_base(nbr / base_len, base, count);
+		ft_putnbr_base(nbr % base_len, base, count);
+	}
 }

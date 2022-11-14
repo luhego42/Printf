@@ -6,85 +6,78 @@
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:48:13 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/11 00:31:47 by luhego           ###   ########.fr       */
+/*   Updated: 2022/11/14 17:36:54 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "printf.h"
-/*
-void	ft_find_type(char c, ...)
+#include "ft_printf.h"
+
+static void	ft_putptr(va_list ap, int *count)
 {
-	if (c == "%c")
-		c = va_arg(ap, int);
-	if (c == "%s")
-		s = va_arg(ap, int);
-	if (c == "%p")
-		p = (ap, int);
-	if (c == "%d")
-		d = va_arg(ap, int);
-	if (c == "%i")
-		i = va_arg(ap, int);
-	if (c == "%u")
-		u = va_arg(ap, int)
-	if (c == "%x")
-		x = va_arg(ap, int);
-	if (c == "%X")
-		x = va_arg(ap, int);
-	if (c == "%%")
-		ft_putchar('%');
-		
+	size_t	ptr;
+
+	ptr = va_arg(ap, size_t);
+	if (!ptr)
+		ft_putstr("(nil)", count);
+	else
+	{
+		ft_putstr("0x", count);
+		ft_unsigned_putnbr(ptr, "0123456789abcdef", count);
+	}
 }
-	if (%c)
-		ft_putchar(c);
-	if (%s)
-		ft_putstr(s);
-	if (%p)
-		void *(p, "0123456789ABCDEF");
-	if (%d)
-		ft_putnbr_base(d, "0123456789");
-	if (%i)
-		ft_putnbr_base(i, "0123456789");
-	if (%u)
-		ft_putnbr(u, "0123456789");
-	if (%x)
-		ft_putnbr(x, "0123456789abcdef");
-	if (%X)
-		ft_putnbr(X, "0123456789ABCDEF");
-	if (%%)
-		ft_putchar('%');
-		
-*/
 
-void	ft_printf(const char *str, ...)
+static void	ft_find_type(char c, va_list ap, int *count)
 {
-	int	i;
+	if (c == 'c')
+		ft_putchar(va_arg(ap, int), count);
+	if (c == 's')
+		ft_putstr(va_arg(ap, char *), count);
+	if (c == 'p')
+		ft_putptr(ap, count);
+	if (c == 'd')
+		ft_putnbr_base(va_arg(ap, int), "0123456789", count);
+	if (c == 'i')
+		ft_putnbr_base(va_arg(ap, int), "0123456789", count);
+	if (c == 'u')
+		ft_putnbr_base(va_arg(ap, unsigned int), "0123456789", count);
+	if (c == 'x')
+		ft_putnbr_base(va_arg(ap, unsigned int), "0123456789abcdef", count);
+	if (c == 'X')
+		ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF", count);
+	if (c == '%')
+		ft_putchar('%', count);
+}
 
+int	ft_printf(const char *str, ...)
+{
+	int		i;
 	va_list	ap;
+	int		count;
 
+	count = 0;
 	if (!str)
-		return ;
+		return (-1);
 	i = 0;
 	va_start(ap, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && strchr("cspdiuxX%", str[i + 1]))
+		if (str[i] == '%' && ft_strchr("cspdiuxX%", str[i + 1]))
 		{
-			ft_find_type(str[i + 1], ap)
+			ft_find_type(str[i + 1], ap, &count);
+			i++;
 		}
-		ft_putchar(str[i]);
+		else
+			ft_putchar(str[i], &count);
 		i++;
 	}
+	return (count);
 }
 
 int	main(void)
 {
-	int		un_chiffre = 5;
-	int		un_nombre = 25;
-	char	une_lettre = 'L';
-	char	*une_ligne = "le pingouin";
-
-	ft_printf("le pourcent = %% chiffre est = %i, le nombre est = %d, et la lettre est = %c, la ligne est = %s", un_chiffre, un_nombre, une_lettre, une_ligne);
-	write(1, "\n", 1);
-	printf("le pourcent = %% le chiffre est = %i, le nombre est = %d, et la lettre est = %c, la ligne est = %s", un_chiffre, un_nombre, une_lettre, une_ligne);
+	printf("%d %d", 
+	ft_printf(0),
+	printf(0));
+	return (0);
 }

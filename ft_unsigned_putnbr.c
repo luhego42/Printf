@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_unsigned_putnbr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:49:02 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/10 16:46:21 by luhego           ###   ########.fr       */
+/*   Created: 2022/11/14 17:03:36 by luhego            #+#    #+#             */
+/*   Updated: 2022/11/14 17:19:08 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __PRINTF_H__
-# define __PRINTF_H__
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+void	ft_unsigned_putnbr(size_t nbr, char *base, int *count)
+{
+	size_t	base_len;
 
-long long		ft_strlen(const char *s);
-void			ft_putchar(char c);
-void			ft_putstr(const char *str);
-void			ft_putnbr_base(long long nbr, char *base);
-
-#endif
+	base_len = ft_strlen(base);
+	if (nbr >= 0 && nbr < base_len)
+		ft_putchar(base[nbr], count);
+	else
+	{
+		ft_unsigned_putnbr(nbr / base_len, base, count);
+		ft_unsigned_putnbr(nbr % base_len, base, count);
+	}
+}
