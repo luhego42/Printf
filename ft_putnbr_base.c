@@ -6,11 +6,11 @@
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:07:52 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/14 16:47:56 by luhego           ###   ########.fr       */
+/*   Updated: 2022/12/18 12:49:58 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
 void	ft_putnbr_base(long long nbr, char *base, int *count)
 {

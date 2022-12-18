@@ -6,12 +6,11 @@
 /*   By: luhego <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:48:13 by luhego            #+#    #+#             */
-/*   Updated: 2022/11/14 17:36:54 by luhego           ###   ########.fr       */
+/*   Updated: 2022/12/18 13:14:49 by luhego           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "printf.h"
 
 static void	ft_putptr(va_list ap, int *count)
 {
@@ -76,8 +75,9 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	printf("%d %d", 
-	ft_printf(0),
-	printf(0));
+	int	i;
+
+	i = 15;
+	ft_printf("le resultat de i est = %i", i);
 	return (0);
 }
